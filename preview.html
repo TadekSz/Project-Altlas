@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATL-405-88 · Nebula Blue</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #325AB4;
+    --blue-p3: color(display-p3 0.216 0.345 0.698);
+    --ink: #0e0f14;
+    --surface: #f4f3ef;
+    --rule: #d4d2cb;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+  }
+
+  body {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--blue);
+    padding: 64px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-id {
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(52px, 8vw, 96px);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.6);
+    margin-top: 16px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .hero-badges {
+    display: flex;
+    gap: 8px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .badge.pass { background: rgba(100,220,130,0.2); border-color: rgba(100,220,130,0.4); color: #8ef5a8; }
+  .badge.warn { background: rgba(255,200,80,0.2); border-color: rgba(255,200,80,0.4); color: #ffd97a; }
+
+  /* LAYOUT */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+  }
+
+  /* SECTION */
+  .section {
+    border-top: 1px solid var(--rule);
+    padding: 40px 0;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 24px;
+  }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 640px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+    .hero { padding: 40px 24px 32px; }
+  }
+
+  /* CARD */
+  .card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    padding: 20px;
+  }
+  .card-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 10px;
+  }
+  .card-value {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .card-sub {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  /* SWATCH ROW */
+  .swatch-row {
+    display: flex;
+    gap: 2px;
+    height: 64px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .swatch-row .sw { flex: 1; }
+
+  /* SPECTRAL CHART */
+  .spectral-wrap { position: relative; }
+  .spectral-chart {
+    width: 100%;
+    height: 160px;
+    display: block;
+  }
+
+  /* DATA ROW */
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .data-row:last-child { border-bottom: none; }
+  .data-key { color: #888; font-size: 12px; }
+  .data-val { font-weight: 500; color: var(--ink); }
+  .data-val.mono { font-family: var(--mono); }
+
+  /* CONTRAST BLOCK */
+  .contrast-block {
+    padding: 20px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .contrast-block p { font-size: 14px; margin-bottom: 4px; }
+  .contrast-block .ratio { font-size: 28px; font-weight: 500; margin-bottom: 8px; }
+  .contrast-block .pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .pill.pass { background: #e6f9ec; color: #1a7a35; }
+  .pill.fail { background: #fdecea; color: #c0392b; }
+
+  /* REVISION TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .timeline-ver { font-weight: 500; margin-bottom: 2px; }
+  .timeline-date { color: #888; font-size: 11px; margin-bottom: 4px; }
+  .timeline-note { color: #555; font-size: 12px; }
+
+  /* CSS TOKEN */
+  .token-block {
+    background: var(--ink);
+    color: #e0ddd5;
+    padding: 20px 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.9;
+    border-radius: 2px;
+  }
+  .token-comment { color: #5a6070; }
+  .token-prop { color: #7ec8e3; }
+  .token-val { color: #c3e88d; }
+
+  /* SOURCE TRUTH BANNER */
+  .truth-banner {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--blue);
+    padding: 14px 20px;
+    margin-bottom: 32px;
+    font-size: 12px;
+    color: #555;
+  }
+  .truth-banner strong { color: var(--ink); }
+
+  /* TOLERANCE */
+  .delta-bar {
+    height: 6px;
+    background: #e8e8e4;
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .delta-fill {
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, #4caf90, #f0a500);
+    border-radius: 3px;
+  }
+
+  /* ANIMATION */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .section { animation: fadeUp 0.4s ease both; }
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.10s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.20s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+  .section:nth-child(6) { animation-delay: 0.30s; }
+  .section:nth-child(7) { animation-delay: 0.35s; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-id">Atlas Open Foundation · ATL-405-88 · Schema v2.0</div>
+  <div class="hero-name">Nebula Blue</div>
+  <div class="hero-sub">Core Spectrum · Source of truth: Spectral data</div>
+  <div class="hero-badges">
+    <span class="badge">Corporate</span>
+    <span class="badge">Cool</span>
+    <span class="badge">Primary</span>
+    <span class="badge pass">Broadcast Safe</span>
+    <span class="badge warn">Tritanopia — use with care</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- IDENTITY -->
+  <div class="section">
+    <div class="section-label">Color Identity</div>
+    <div class="truth-banner">
+      <strong>Source of truth:</strong> All digital and print translations are derived from the spectral data below.
+      Checksum: <span style="color:var(--blue)">sha256:a3f1c8…b1c7a3</span>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-label">CIELAB (D50 / 2°)</div>
+        <div class="card-value">L 45.2</div>
+        <div class="card-sub">a* +5.15 · b* −48.10</div>
+      </div>
+      <div class="card">
+        <div class="card-label">OKLCH</div>
+        <div class="card-value">264.5°</div>
+        <div class="card-sub">L 0.452 · C 0.198</div>
+        <div class="card-sub" style="margin-top:6px;color:var(--blue)">oklch(45.2% 0.198 264.5)</div>
+      </div>
+      <div class="card">
+        <div class="card-label">ΔE₂₀₀₀ Tolerance</div>
+        <div class="card-value">≤ 2.0</div>
+        <div class="delta-bar"><div class="delta-fill"></div></div>
+        <div class="card-sub" style="margin-top:6px">Acceptable deviation range</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECTRAL -->
+  <div class="section">
+    <div class="section-label">Spectral Reflectance · 380–730 nm</div>
+    <svg class="spectral-chart" viewBox="0 0 880 160" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="specGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#7b3fce"/>
+          <stop offset="12%"  stop-color="#4040f0"/>
+          <stop offset="28%"  stop-color="#325AB4"/>
+          <stop offset="44%"  stop-color="#00aacc"/>
+          <stop offset="56%"  stop-color="#00cc66"/>
+          <stop offset="72%"  stop-color="#aacc00"/>
+          <stop offset="84%"  stop-color="#ff8800"/>
+          <stop offset="100%" stop-color="#cc2200"/>
+        </linearGradient>
+        <clipPath id="curveClip">
+          <path d="M0,160 L0,119 L24,112 L49,107 L73,96 L98,78 L122,51 L147,21 L171,8 L196,10 L220,22 L244,44 L269,69 L293,84 L318,90 L342,93 L366,95 L391,96 L415,97 L440,97 L464,98 L489,98 L513,99 L537,99 L562,100 L586,100 L610,101 L635,101 L659,102 L683,102 L708,103 L732,103 L756,104 L781,104 L805,105 L830,105 L854,106 L880,106 L880,160 Z"/>
+        </clipPath>
+      </defs>
+      <rect x="0" y="0" width="880" height="160" fill="url(#specGrad)" clip-path="url(#curveClip)" opacity="0.25"/>
+      <path d="M0,119 L24,112 L49,107 L73,96 L98,78 L122,51 L147,21 L171,8 L196,10 L220,22 L244,44 L269,69 L293,84 L318,90 L342,93 L366,95 L391,96 L415,97 L440,97 L464,98 L489,98 L513,99 L537,99 L562,100 L586,100 L610,101 L635,101 L659,102 L683,102 L708,103 L732,103 L756,104 L781,104 L805,105 L830,105 L854,106 L880,106"
+            fill="none" stroke="#325AB4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- wavelength labels -->
+      <text x="0"   y="155" font-size="10" fill="#aaa" font-family="monospace">380</text>
+      <text x="220" y="155" font-size="10" fill="#aaa" font-family="monospace">460</text>
+      <text x="440" y="155" font-size="10" fill="#aaa" font-family="monospace">540</text>
+      <text x="660" y="155" font-size="10" fill="#aaa" font-family="monospace">620</text>
+      <text x="845" y="155" font-size="10" fill="#aaa" font-family="monospace">730</text>
+      <!-- peak annotation -->
+      <line x1="171" y1="8" x2="171" y2="30" stroke="#325AB4" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="130" y="44" font-size="10" fill="#325AB4" font-family="monospace">peak ~460nm</text>
+    </svg>
+  </div>
+
+  <!-- DIGITAL -->
+  <div class="section">
+    <div class="section-label">Digital Translation</div>
+    <div class="swatch-row">
+      <div class="sw" style="background:#325AB4" title="sRGB"></div>
+      <div class="sw" style="background:#3758B2" title="Display P3"></div>
+      <div class="sw" style="background:#3C55AF" title="Rec. 2020"></div>
+    </div>
+    <div style="display:flex;gap:8px;font-size:10px;color:#888;margin-bottom:24px;letter-spacing:0.05em">
+      <span>sRGB</span><span>Display P3</span><span>Rec. 2020</span>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-label">sRGB</div>
+        <div class="card-value" style="font-size:18px">#325AB4</div>
+        <div class="card-sub">rgb(50, 90, 180)</div>
+        <div class="card-sub">hsl(225, 56%, 45%)</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Display P3</div>
+        <div class="card-value" style="font-size:18px">#3758B2</div>
+        <div class="card-sub">color(display-p3 0.216 0.345 0.698)</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Rec. 2020</div>
+        <div class="card-value" style="font-size:18px">#3C55AF</div>
+        <div class="card-sub">color(rec2020 0.235 0.333 0.686)</div>
+      </div>
+    </div>
+    <div style="margin-top:20px">
+      <div class="token-block">
+        <div class="token-comment">/* CSS Custom Property */</div>
+        <div><span class="token-prop">--color-nebula-blue</span>: <span class="token-val">color(display-p3 0.216 0.345 0.698)</span>;</div>
+        <br>
+        <div class="token-comment">/* Usage with sRGB fallback */</div>
+        <div><span class="token-prop">background</span>: <span class="token-val">#325AB4</span>;</div>
+        <div><span class="token-prop">background</span>: <span class="token-val">var(--color-nebula-blue, #325AB4)</span>;</div>
+        <br>
+        <div class="token-comment">/* OKLCH (modern browsers) */</div>
+        <div><span class="token-prop">background</span>: <span class="token-val">oklch(45.2% 0.198 264.5)</span>;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINT -->
+  <div class="section">
+    <div class="section-label">Print Translation</div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-label">FOGRA39 · Coated</div>
+        <div class="data-row"><span class="data-key">C</span><span class="data-val">85%</span></div>
+        <div class="data-row"><span class="data-key">M</span><span class="data-val">65%</span></div>
+        <div class="data-row"><span class="data-key">Y</span><span class="data-val">0%</span></div>
+        <div class="data-row"><span class="data-key">K</span><span class="data-val">0%</span></div>
+        <div class="data-row"><span class="data-key">TIC</span><span class="data-val">150%</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">FOGRA47 · Uncoated</div>
+        <div class="data-row"><span class="data-key">C</span><span class="data-val">80%</span></div>
+        <div class="data-row"><span class="data-key">M</span><span class="data-val">60%</span></div>
+        <div class="data-row"><span class="data-key">Y</span><span class="data-val">0%</span></div>
+        <div class="data-row"><span class="data-key">K</span><span class="data-val">5%</span></div>
+        <div class="data-row"><span class="data-key">TIC</span><span class="data-val">145%</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">GRACoL 2013 · US Coated</div>
+        <div class="data-row"><span class="data-key">C</span><span class="data-val">83%</span></div>
+        <div class="data-row"><span class="data-key">M</span><span class="data-val">63%</span></div>
+        <div class="data-row"><span class="data-key">Y</span><span class="data-val">0%</span></div>
+        <div class="data-row"><span class="data-key">K</span><span class="data-val">0%</span></div>
+        <div class="data-row"><span class="data-key">TIC</span><span class="data-val">146%</span></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="card-label">Pantone Nearest Match</div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="width:48px;height:48px;background:#2E4FA3;border-radius:2px;flex-shrink:0"></div>
+        <div>
+          <div style="font-size:16px;font-weight:500">Pantone 2728 C</div>
+          <div style="color:#888;font-size:12px;margin-top:2px">ΔE₂₀₀₀ = 3.4 — visible but acceptable. Use 2728 U for uncoated stock.</div>
+          <div style="color:#c0392b;font-size:11px;margin-top:4px">No exact spot color defined</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCESSIBILITY -->
+  <div class="section">
+    <div class="section-label">Accessibility</div>
+    <div class="grid-2">
+      <div>
+        <div class="contrast-block" style="background:var(--blue);color:#fff">
+          <p style="opacity:0.6;font-size:11px;letter-spacing:0.1em;text-transform:uppercase">On White Background</p>
+          <div class="ratio">4.61 : 1</div>
+          <div class="pills">
+            <span class="pill pass">AA Normal</span>
+            <span class="pill pass">AA Large</span>
+            <span class="pill pass">AAA Large</span>
+            <span class="pill fail">AAA Normal</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="contrast-block" style="background:#000;color:#fff">
+          <p style="opacity:0.4;font-size:11px;letter-spacing:0.1em;text-transform:uppercase">On Black Background</p>
+          <div class="ratio">4.55 : 1</div>
+          <div class="pills">
+            <span class="pill pass">AA Normal</span>
+            <span class="pill pass">AA Large</span>
+            <span class="pill pass">AAA Large</span>
+            <span class="pill fail">AAA Normal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:0">
+      <div class="card-label">Color Vision Deficiency</div>
+      <div class="data-row">
+        <span class="data-key">Deuteranopia (red-green)</span>
+        <span style="color:#1a7a35;font-weight:500">✓ Safe</span>
+      </div>
+      <div class="data-row">
+        <span class="data-key">Protanopia (red-green)</span>
+        <span style="color:#1a7a35;font-weight:500">✓ Safe</span>
+      </div>
+      <div class="data-row">
+        <span class="data-key">Tritanopia (blue-yellow)</span>
+        <span style="color:#c0392b;font-weight:500">⚠ Avoid pairing with cyan or yellow</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVISIONS -->
+  <div class="section">
+    <div class="section-label">Revision History</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-ver">v2.0 <span style="color:var(--blue)">· Current</span></div>
+          <div class="timeline-date">2026-05-17 · Atlas Open Foundation</div>
+          <div class="timeline-note">Added OKLCH, accessibility data, ΔE tolerance, CSS tokens, GRACoL profile, Pantone nearest-match, and spectral checksum</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:#bbb"></div>
+        <div>
+          <div class="timeline-ver">v1.0</div>
+          <div class="timeline-date">2024-01-15 · Atlas Open Foundation</div>
+          <div class="timeline-note">Initial definition</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
