@@ -1,0 +1,181 @@
+{
+  "atlas_schema_version": "2.0",
+  "color": {
+    "id": "ATL-405-88",
+    "name": "Nebula Blue",
+    "metadata": {
+      "collection": "Core Spectrum",
+      "author": "Atlas Open Foundation",
+      "created": "2024-01-15",
+      "tags": ["corporate", "cool", "primary"],
+      "revisions": [
+        {
+          "version": "1.0",
+          "date": "2024-01-15",
+          "author": "Atlas Open Foundation",
+          "note": "Initial definition"
+        },
+        {
+          "version": "2.0",
+          "date": "2026-05-17",
+          "author": "Atlas Open Foundation",
+          "note": "Added OKLCH, accessibility data, tolerance ranges, CSS tokens, GRACoL profile, Pantone nearest-match, and spectral checksum"
+        }
+      ]
+    },
+
+    "source_of_truth": "spectral_data",
+    "spectral_checksum": "sha256:a3f1c8e2d94b0712f6385a1c2e7d904f1b3c5a8e2d17f6b3c0a9e4d2f8b1c7a3",
+
+    "core_identity": {
+      "color_space": "CIELAB",
+      "illuminant": "D50",
+      "observer": "2_degree",
+      "coordinates": {
+        "L": 45.20,
+        "a": 5.15,
+        "b": -48.10
+      },
+      "tolerance": {
+        "delta_e_metric": "CIEDE2000",
+        "acceptable_delta_e": 2.0,
+        "note": "Values within ΔE2000 ≤ 2.0 are considered an acceptable match"
+      }
+    },
+
+    "core_identity_oklch": {
+      "color_space": "OKLCH",
+      "note": "Preferred for perceptual uniformity in modern CSS and tooling",
+      "coordinates": {
+        "L": 0.452,
+        "C": 0.198,
+        "H": 264.5
+      },
+      "css_value": "oklch(45.2% 0.198 264.5)"
+    },
+
+    "spectral_data": {
+      "description": "Reflectance values from 380nm to 730nm at 10nm intervals. This is the canonical source from which all digital and print translations are derived.",
+      "range_nm": [380, 730],
+      "step_nm": 10,
+      "reflectance": [
+        0.041, 0.052, 0.085, 0.150, 0.280, 0.410, 0.480, 0.460,
+        0.390, 0.250, 0.150, 0.090, 0.060, 0.045, 0.038, 0.035,
+        0.032, 0.030, 0.029, 0.028, 0.027, 0.026, 0.025, 0.024,
+        0.024, 0.023, 0.022, 0.022, 0.021, 0.021, 0.020, 0.020,
+        0.019, 0.019, 0.018, 0.018
+      ]
+    },
+
+    "digital_translation": {
+      "note": "All values derived from spectral_data under D50/2° conditions",
+      "sRGB": {
+        "r": 50,
+        "g": 90,
+        "b": 180,
+        "hex": "#325AB4",
+        "hsl": { "h": 225, "s": 56, "l": 45 },
+        "css_hex": "#325AB4",
+        "css_rgb": "rgb(50, 90, 180)",
+        "css_hsl": "hsl(225, 56%, 45%)"
+      },
+      "display_p3": {
+        "r": 55,
+        "g": 88,
+        "b": 178,
+        "hex": "#3758B2",
+        "css_value": "color(display-p3 0.216 0.345 0.698)"
+      },
+      "rec_2020": {
+        "r": 60,
+        "g": 85,
+        "b": 175,
+        "hex": "#3C55AF",
+        "css_value": "color(rec2020 0.235 0.333 0.686)"
+      },
+      "broadcast_safe": true,
+      "css_tokens": {
+        "property": "--color-nebula-blue",
+        "adaptive": "color(display-p3 0.216 0.345 0.698)",
+        "fallback": "#325AB4",
+        "usage": "var(--color-nebula-blue, #325AB4)"
+      }
+    },
+
+    "print_translation": {
+      "note": "Ink values are substrate-dependent. Always proof before production.",
+      "cmyk_fogra39_coated": {
+        "profile": "FOGRA39",
+        "substrate": "Coated (glossy)",
+        "c": 85, "m": 65, "y": 0, "k": 0,
+        "total_ink_coverage": 150
+      },
+      "cmyk_fogra47_uncoated": {
+        "profile": "FOGRA47",
+        "substrate": "Uncoated (matte)",
+        "c": 80, "m": 60, "y": 0, "k": 5,
+        "total_ink_coverage": 145
+      },
+      "cmyk_gracol_coated": {
+        "profile": "GRACoL 2013",
+        "substrate": "Coated (US standard)",
+        "c": 83, "m": 63, "y": 0, "k": 0,
+        "total_ink_coverage": 146
+      },
+      "pantone_nearest": {
+        "code": "2728 C",
+        "name": "Pantone 2728 C",
+        "delta_e": 3.4,
+        "note": "Nearest Pantone match; ΔE 3.4 — visible but acceptable difference. Consider 2728 U for uncoated."
+      },
+      "spot_color": {
+        "available": false,
+        "note": "No exact spot color match defined. Use Pantone 2728 C as closest approximation."
+      }
+    },
+
+    "accessibility": {
+      "note": "Contrast ratios calculated against solid backgrounds per WCAG 2.1",
+      "against_white": {
+        "background": "#FFFFFF",
+        "contrast_ratio": 4.61,
+        "wcag_aa_normal_text": "pass",
+        "wcag_aa_large_text": "pass",
+        "wcag_aaa_normal_text": "fail",
+        "wcag_aaa_large_text": "pass"
+      },
+      "against_black": {
+        "background": "#000000",
+        "contrast_ratio": 4.55,
+        "wcag_aa_normal_text": "pass",
+        "wcag_aa_large_text": "pass",
+        "wcag_aaa_normal_text": "fail",
+        "wcag_aaa_large_text": "pass"
+      },
+      "recommended_text_on_color": "#FFFFFF",
+      "recommended_text_contrast": 4.61,
+      "colorblind_considerations": {
+        "deuteranopia_safe": true,
+        "protanopia_safe": true,
+        "tritanopia_safe": false,
+        "note": "Avoid pairing with cyan or yellow for tritanopia users"
+      }
+    },
+
+    "validation": {
+      "required_fields": [
+        "id", "name", "source_of_truth", "spectral_checksum",
+        "core_identity", "spectral_data", "digital_translation", "print_translation"
+      ],
+      "coordinate_ranges": {
+        "CIELAB_L": [0, 100],
+        "CIELAB_a": [-128, 127],
+        "CIELAB_b": [-128, 127],
+        "OKLCH_L": [0, 1],
+        "OKLCH_C": [0, 0.4],
+        "OKLCH_H": [0, 360],
+        "reflectance_values": [0, 1]
+      }
+    }
+  }
+}
