@@ -23,8 +23,10 @@ You can consume Atlas data directly in your applications via raw GitHub links. N
 
 🤝 Contributing: The Pull Request Ecosystem
 
-Atlas relies on community validation. We cannot test every color on every monitor and printing press in the world—but together, we can.
+Atlas relies on community validation. We cannot test every color on every monitor and printing press in the world, but together, we can.
+
 -Submit a Color: Have spectral data for a beautiful, versatile color? Format it using our v2.0 schema and submit a PR.
+
 -Refine a Translation: If you find that a specific CMYK translation prints too warm on FOGRA47, adjust the math in the JSON file and submit a Pull Request with your physical proofing notes.
 
 License: MIT
