@@ -30,4 +30,5 @@ Atlas relies on community validation. We cannot test every color on every monito
 -Refine a Translation: If you find that a specific CMYK translation prints too warm on FOGRA47, adjust the math in the JSON file and submit a Pull Request with your physical proofing notes.
 
 License: MIT
+
 Maintainer: Atlas Open Foundation
