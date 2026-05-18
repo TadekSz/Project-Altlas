@@ -1,0 +1,56 @@
+{
+  "atlas_schema_version": "2.0",
+  "color": {
+    "id": "ATL-105-04",
+    "name": "Crimson Flare",
+    "metadata": {
+      "collection": "Core Spectrum",
+      "author": "Atlas Open Foundation",
+      "created": "2026-05-18",
+      "tags": ["brand", "warm", "alert", "primary"]
+    },
+    "source_of_truth": "spectral_data",
+    "spectral_checksum": "sha256:b8d4e9f1a2c3...[truncated_for_example]",
+    "core_identity": {
+      "color_space": "CIELAB",
+      "illuminant": "D50",
+      "observer": "2_degree",
+      "coordinates": { "L": 52.4, "a": 65.8, "b": 32.1 },
+      "tolerance": { "delta_e_metric": "CIEDE2000", "acceptable_delta_e": 2.0 }
+    },
+    "core_identity_oklch": {
+      "color_space": "OKLCH",
+      "coordinates": { "L": 0.524, "C": 0.235, "H": 25.4 },
+      "css_value": "oklch(52.4% 0.235 25.4)"
+    },
+    "spectral_data": {
+      "description": "Reflectance values from 380nm to 730nm at 10nm intervals",
+      "range_nm": [380, 730],
+      "step_nm": 10,
+      "reflectance": [
+        0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.05, 0.07, 0.12, 0.25, 0.45, 0.65, 0.78, 0.82, 0.85, 0.86, 0.87, 0.87, 0.88, 0.88, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89
+      ]
+    },
+    "digital_translation": {
+      "sRGB": { "r": 230, "g": 57, "b": 70, "hex": "#E63946" },
+      "display_p3": { "r": 218, "g": 65, "b": 75, "hex": "#DA414B" },
+      "rec_2020": { "r": 200, "g": 60, "b": 70, "hex": "#C83C46" },
+      "broadcast_safe": true,
+      "css_tokens": {
+        "property": "--color-crimson-flare",
+        "adaptive": "color(display-p3 0.855 0.255 0.294)",
+        "fallback": "#E63946"
+      }
+    },
+    "print_translation": {
+      "cmyk_fogra39_coated": { "c": 5, "m": 90, "y": 70, "k": 0 },
+      "cmyk_fogra47_uncoated": { "c": 0, "m": 85, "y": 65, "k": 5 },
+      "pantone_nearest": { "code": "1788 C", "delta_e": 2.8 }
+    },
+    "accessibility": {
+      "against_white": { "background": "#FFFFFF", "contrast_ratio": 4.12, "wcag_aa_large_text": "pass" },
+      "against_black": { "background": "#000000", "contrast_ratio": 5.10, "wcag_aa_normal_text": "pass" },
+      "colorblind_considerations": { "deuteranopia_safe": false, "protanopia_safe": false, "tritanopia_safe": true }
+    }
+  }
+}
